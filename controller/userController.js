@@ -37,7 +37,7 @@ export const registerController= async (req, res) => {
         error,
       });
     }
-  };
+  }; 
   
   // get all users
   export const getAllUsers = async (req, res) => {
@@ -58,6 +58,58 @@ export const registerController= async (req, res) => {
       });
     }
   };
+  export const getUserById = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const user = await userModel.findById(id);
+      if (!user) {
+        return res.status(404).send({
+          success: false,
+          message: "User not found with this id",
+        });
+      }
+      return res.status(200).send({
+        success: true,
+        message: "fetch User",
+        user,
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(400).send({
+        success: false,
+        message: "error while getting user",
+        error,
+      });
+    }
+  };
+  
+  // export const getUserById = async (req, res) => {
+  //   const userId = req.params.id; // Assuming the userId is passed as a route parameter
+  
+  //   try {
+  //     const user = await userModel.findById(userId);
+  
+  //     if (!user) {
+  //       return res.status(404).send({
+  //         success: false,
+  //         message: 'User not found',
+  //       });
+  //     }
+  
+  //     return res.status(200).send({
+  //       success: true,
+  //       message: 'User found',
+  //       user,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //     return res.status(500).send({
+  //       success: false,
+  //       message: 'Error in retrieving user',
+  //       error,
+  //     });
+  //   }
+  // };
   
 export const loginController= async (req, res) => {
     try {

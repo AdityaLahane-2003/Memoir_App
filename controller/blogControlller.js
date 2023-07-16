@@ -187,7 +187,7 @@ export const userBlogControlller = async (req, res) => {
   try {
     const userBlog = await userModel.findById(req.params.id).populate("blogs");
 
-    if (!userBlog) {
+    if (!userBlog) { 
       return res.status(404).send({
         success: false,
         message: "blogs not found with this id",
